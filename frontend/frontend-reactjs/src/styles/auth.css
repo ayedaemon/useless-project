@@ -1,0 +1,68 @@
+.loginBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputBox {
+  width: 75%;
+  height: 30px;
+  margin-bottom: 20px;
+  padding-left: 10px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+.inputBox:focus {
+  outline-color: gray;
+}
+
+#signUpForm,
+#logInForm {
+  border: 1px solid gray;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 400px;
+  height: 450px;
+  /* margin: 40px 70px 0 0; */
+  margin-right: 10px;
+  margin-left: 10px;
+  box-shadow: 0 0 4px 2px lightgoldenrodyellow;
+  min-width: 200px;
+  background-color: white;
+}
+#logInForm {
+  height: 300px;
+  /* margin-top: 100px; */
+}
+
+#forgetPassword {
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+#signupRedirect {
+  text-decoration: none;
+}
+
+#forgetPassword:link,
+#forgetPassword:visited,
+#signupRedirect:link,
+#signupRedirect:visited {
+  color: tomato;
+}
+#signUpButton,
+#logInButton {
+  width: 75%;
+  padding: 5px;
+  color: white;
+  font-weight: 600;
+  background-color: tomato;
+  border: 1px solid tomato;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#logInForm > p {
+  font-size: 12px;
+}
