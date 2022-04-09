@@ -1,7 +1,16 @@
+# FROM node:alpine
+
+# WORKDIR '/app'
+# COPY package.json .
+# RUN npm install
+# COPY . .
+# CMD ["npm","start"]
+
 FROM node:alpine
 
 WORKDIR '/app'
-COPY package.json .
-RUN npm install
+COPY build .
+RUN npm install -g serve
 COPY . .
-CMD ["npm","start"]
+CMD ["serve","-s","build"]
+
