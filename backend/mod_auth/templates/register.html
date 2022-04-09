@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block app %}
+
+<div id="app">  
+  <div class="container mt-5">
+    <form>
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" v-model="email" >
+        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="InputUsername" class="form-label">Username</label>
+        <input type="text" class="form-control" v-model="username" >
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <div class="mb-3">
+        <label for="InputConfirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" class="form-control" v-model="confirm_password">
+      </div>
+
+      <button type="submit" @click="register" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+
+
+
+{% block vue %}
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        email: '',
+        username: '',
+        password: '',
+        confirm_password: ''
+      }
+    },
+    methods: {
+      register() {
+        const register_api = "{{ url_for('mod_auth_api.register') }}";
+        // const data = { username: 'example' };
+
+        // const response = await fetch(register_api)
+        // //fetch("https://api.npms.io/v2/search?q=vue");
+        // const data = await response.json();
+        console.log(register_api);
+        fetch(register_api)
+        .then(response => response.json())
+        .then(data => (console.log(data)));
+  
+        
+        // console.log(data);
+  
+
+        
+
+        // console.log(this.email, this.username, this.password, this.confirm_password, register_api)
+      }
+    },
+    delimiters: ['[[', ']]']
+  }).mount('#app')
+</script>
+{% endblock %}

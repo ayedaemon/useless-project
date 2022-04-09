@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+
+
+{% block app %}
+
+LOGIN VIEW
+
+{{data.list_items}}
+      <!-- <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" v-model="message">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div> -->
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block vue %}
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        email: '',
+        username: '',
+        password: '',
+        confirm_password: ''
+      }
+    },
+    methods: {
+      register(event) {
+        const register_api = "{{ url_for('mod_auth_api.register') }}";
+        console.log(register_api);
+        console.log(this.email, this.username, this.password, this.confirm_password)
+      }
+    },
+    delimiters: ['[[', ']]']
+  }).mount('#app')
+</script>
+{% endblock %}
