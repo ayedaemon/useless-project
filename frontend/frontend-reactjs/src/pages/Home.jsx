@@ -14,13 +14,14 @@ const color = [
   "#48C9B0",
 ];
 
-const Home = () => {
+const Home = (props) => {
   useEffect(() => {
     document.title = "UseLess";
     let item = document.getElementById("title");
     let randomColor = Math.floor(Math.random() * color.length);
     item.style.color = color[randomColor];
   }, []);
+
   return (
     <h1 className="front" id="title">
       Welcome to Useless-Project

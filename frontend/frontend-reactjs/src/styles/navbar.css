@@ -8,9 +8,9 @@
   padding: 0 20px;
   color: white;
 }
-.lightNav{
-  background-color: #C3ED26;
-  color:black;
+.lightNav {
+  background-color: #c3ed26;
+  color: black;
 }
 
 a {
@@ -30,7 +30,6 @@ a {
   cursor: pointer;
 }
 
-
 .loginButton,
 .theme {
   margin-right: 10px;
@@ -44,36 +43,35 @@ a {
 .loginButton:focus {
   box-shadow: 1px 1px 4px black;
 }
-.lightBtn{
+.lightBtn {
   background-color: white;
-  color:tomato;
+  color: tomato;
   border: 1px solid tomato;
- 
- }
-@media only screen and (max-width:392px){
-  .navLayout{
+}
+@media only screen and (max-width: 392px) {
+  .navLayout {
     flex-direction: column;
     min-height: 80px;
     justify-content: center;
     align-items: center;
     padding-bottom: 10px;
   }
-  .button{
+  .button {
     width: 100%;
     display: flex;
     justify-content: space-around;
     /* flex-direction: column; */
   }
 }
-@media only screen and (max-width:245px){
-  .button{
+@media only screen and (max-width: 245px) {
+  .button {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
   }
-  .button button{
+  .button button {
     width: 100%;
     margin-bottom: 9px;
   }

@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/navbar.css";
 
-const NavBar = () => {
+const NavBar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [mode, setMode] = useState(true);
+  const [mode, setMode] = useState({
+    state: true,
+    text: "Dark",
+  });
   const name = "Guest";
+
+  // useEffect(() => {
+  //   let data = localStorage.getItem("theme");
+  //   if (data === null) {
+  //     localStorage.setItem("theme", true);
+  //     setMode({ text: "Dark", state: true });
+  //   } else {
+  //     localStorage.setItem("theme", mode.state);
+  //   }
+  // }, [mode.state]);
 
   function theme() {
     // mode = true -> dark theme
@@ -12,38 +25,51 @@ const NavBar = () => {
     //mode?setMode(false):setMode(true)
 
     let ele = document.getElementById("navBar");
-    let elem = document.getElementById("btn");
+    let elems = document.querySelectorAll("button.dummy");
 
-    if (mode) {
-      setMode(false);
+    if (mode.state === true) {
+      setMode({ text: "Light", state: false });
       ele.classList.add("lightNav");
-      elem.classList.add("lightNav")
+      document.getElementById("logo").style.color = "black";
+      elems.forEach((item) => item.classList.add("lightBtn"));
+      props.bcc(false);
     } else {
-      setMode(true);
+      setMode({ text: "Dark", state: true });
+      document.getElementById("logo").style.color = "white";
       ele.classList.remove("lightNav");
-      document.getElementById("btn").classList.remove("lightBtn");
-      
+      elems.forEach((item) => item.classList.remove("lightBtn"));
+      props.bcc(true);
     }
   }
 
   return (
     <div className="navLayout" id="navBar">
       <a href="/">
-        <h3 className="logo">Use-Less</h3>
+        <h3 className="logo" id="logo">
+          Use-Less
+        </h3>
       </a>
       <div className="button">
-        <button className="theme dummy" id="btn" onClick={()=>theme()}>Dark</button>
+        <button className="theme dummy" id="btn" onClick={() => theme()}>
+          {mode.text}
+        </button>
         {!loggedIn ? (
           <>
             <a href="/login">
-              <button className="loginButton dummy" id="b" >Login</button>
+              <button className="loginButton dummy" id="loginbtn">
+                Login
+              </button>
             </a>
             <a href="/signup">
-              <button className="signupButton dummy" id="b" >SignUp</button>
+              <button className="signupButton dummy" id="signupbtn">
+                SignUp
+              </button>
             </a>
           </>
         ) : (
-          <button className="signupButton dummy" id="b" >Welcome {name}</button>
+          <button className="signupButton dummy" id="welcomebtn">
+            Welcome {name}
+          </button>
         )}
       </div>
     </div>

@@ -1,8 +1,11 @@
-.body{
+.body {
   min-height: 91vh;
   background-color: #1b1c1c;
   /* color: white; */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.bodyLight {
+  background-color: #ffffff;
 }
