@@ -12,6 +12,13 @@
 </head>
 <body>
   <div>
+    {% with flash_messages = get_flashed_messages() %}
+      {% if flash_messages %}
+          {% for message in flash_messages %}
+            {{ message }}
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
