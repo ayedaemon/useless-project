@@ -1,26 +1,25 @@
 {% extends 'base.html' %}
 
 
-
-
-
-
-
-
 {% block app %}
 
-LOGIN VIEW
+<div id="app">  
+  <div class="container mt-5">
+    <form>
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label">Email address</label>
+        <input type="email" class="form-control" v-model="email" >
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label">Password</label>
+        <input type="password" class="form-control" v-model="password">
+      </div>
+      <button type="submit" @click="login" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
 
-{{data.list_items}}
-      <!-- <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" v-model="message">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div> -->
 {% endblock %}
-
-
-
-
 
 
 
@@ -31,16 +30,26 @@ LOGIN VIEW
     data() {
       return {
         email: '',
-        username: '',
         password: '',
-        confirm_password: ''
       }
     },
     methods: {
-      register(event) {
-        const register_api = "{{ url_for('mod_auth_api.register') }}";
-        console.log(register_api);
-        console.log(this.email, this.username, this.password, this.confirm_password)
+      async login(e) {
+        e.preventDefault();
+        const login_api = "{{ url_for('mod_auth_api.login') }}";
+        const obj = {
+          "email": this.email,
+          "password": this.password,
+        }
+        const requestOptions = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(obj)
+        };
+
+        const response = await fetch(login_api, requestOptions);
+        const responseText = await response.text();
+        console.log(responseText);  
       }
     },
     delimiters: ['[[', ']]']

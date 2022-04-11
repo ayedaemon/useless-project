@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, flash, request
 from pprint import pprint
 from flask import current_app
-
+from .db import UserAuthDB, open_conn, close_conn, create_table
 
 ############################
 #
-#   AUTH Module apis
+#   AUTH Module apis == REGISTER
 #
 #############################
 
@@ -29,11 +29,27 @@ def register():
     current_app.logger.info("Trying to register user : "
                         f"{response.get('request_parameters').get('username')}")
     
-    # TBD: Register user here in db
-
+    # Create UserAuth object
+    user = UserAuthDB(
+        username=username,
+        email=email,
+        passwd=password)
+    # Add user to DB
+    status = user.db_add_user()
+    # Check if already registered or new register
+    if status == True:
+        response['msg'] = 'User added successfully!'
+    elif status == False:
+        response['msg'] = 'User already registered. Please login!'
+    
     return jsonify(response)
 
 
+############################
+#
+#   AUTH Module apis ==  LOGIN
+#
+#############################
 
 @mod_auth_api.post('login')
 def login():
@@ -43,6 +59,8 @@ def login():
 
     email = response.get('request_parameters').get('email')
     password = response.get('request_parameters').get('password')
+
+    current_app.logger.info(email, password)
 
     if not email or not password:
         response['error_msg'] = "Something is not right. Check the user data again."

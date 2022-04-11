@@ -1,5 +1,4 @@
-# from flask import Blueprint, jsonify
-
+## logging configuration
 from logging.config import dictConfig
 dictConfig({
     'version': 1,
@@ -17,6 +16,14 @@ dictConfig({
     }
 })
 
+
+
+## create table
+
+from .db import open_conn, close_conn, create_table
+con = open_conn('auth.db')
+create_table(con)    
+close_conn(con)
 
 
 ## finally load blueprints
