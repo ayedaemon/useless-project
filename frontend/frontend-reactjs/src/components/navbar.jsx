@@ -9,7 +9,7 @@ const NavBar = (props) => {
   });
   const name = "Guest";
 
-  // useEffect(() => {
+  // function existingTheme() {
   //   let data = localStorage.getItem("theme");
   //   if (data === null) {
   //     localStorage.setItem("theme", true);
@@ -17,9 +17,10 @@ const NavBar = (props) => {
   //   } else {
   //     localStorage.setItem("theme", mode.state);
   //   }
-  // }, [mode.state]);
+  //   // console.log("data");
+  // }
 
-  function theme() {
+  function theme(arg) {
     // mode = true -> dark theme
     // mode = false -> light theme
     //mode?setMode(false):setMode(true)
@@ -27,7 +28,7 @@ const NavBar = (props) => {
     let ele = document.getElementById("navBar");
     let elems = document.querySelectorAll("button.dummy");
 
-    if (mode.state === true) {
+    if (arg) {
       setMode({ text: "Light", state: false });
       ele.classList.add("lightNav");
       document.getElementById("logo").style.color = "black";
@@ -50,7 +51,11 @@ const NavBar = (props) => {
         </h3>
       </a>
       <div className="button">
-        <button className="theme dummy" id="btn" onClick={() => theme()}>
+        <button
+          className="theme dummy"
+          id="btn"
+          onClick={() => theme(mode.state)}
+        >
           {mode.text}
         </button>
         {!loggedIn ? (
@@ -72,6 +77,7 @@ const NavBar = (props) => {
           </button>
         )}
       </div>
+      {/* {existingTheme()} */}
     </div>
   );
 };
