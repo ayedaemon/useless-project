@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "../styles/auth.css";
+import { Register } from "../api/authAPI";
 const Signup = () => {
   const [state, setState] = useState({
     firstName: "",
@@ -16,7 +17,17 @@ const Signup = () => {
   // console.log("hi there")
   return (
     <div className="loginBox">
-      <form id="signUpForm" data-testid="logInForm">
+      <form
+        id="signUpForm"
+        data-testid="logInForm"
+        onSubmit={() =>
+          Register(
+            `${state.firstName} ${state.lastName}`,
+            state.email,
+            state.password
+          )
+        }
+      >
         <h2 id="logInTitle">SignUp</h2>
         <input
           type="text"

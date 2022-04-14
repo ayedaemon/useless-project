@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import {Signin} from "../api/authAPI";
 import "../styles/auth.css";
+
 const Login = () => {
   const [state, setState] = useState({
     email: "",
@@ -12,7 +14,7 @@ const Login = () => {
   // console.log("hi there")
   return (
     <div className="loginBox">
-      <form id="logInForm" data-testid="logInForm">
+      <form id="logInForm" data-testid="logInForm" onSubmit={()=> Signin(state.email,state.password)}>
         <h2 id="logInTitle">Sign In</h2>
         <input
           type="email"
