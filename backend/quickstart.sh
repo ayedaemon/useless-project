@@ -1,3 +1,6 @@
+
+sudo systemctl start docker
+
 echo " [ + ] Building docker image ...."
 docker build -t flaskdev .
 

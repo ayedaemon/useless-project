@@ -2,3 +2,6 @@ werkzeug>=0.14
 flask-cors
 flask
 gunicorn
+Flask-SQLAlchemy
+flask-jwt-extended[asymmetric_crypto]
+

@@ -1,4 +1,9 @@
-from python
+FROM python
+
+RUN useradd -ms /bin/bash  ayedaemon
+USER ayedaemon
+
+
 
 WORKDIR /app
 

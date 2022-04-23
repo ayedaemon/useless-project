@@ -1,34 +1,43 @@
 from flask import Flask
-from flask_cors import CORS
 
-def create_app(test_config=None):
-    app = Flask(__name__, instance_relative_config=True)
-    # CORS(app, supports_credentials=True)
+
+def create_app(test_config=None) -> Flask:
+
+    app = Flask(__name__)
 
     # Import config
     if test_config is None:
-        app.config.from_pyfile('config.py', silent=True)
-        print('Loading config from config.py')
+        config_file = 'config.py'
+        app.config.from_pyfile(config_file, silent=False)
+        app.logger.info(f"config loaded successfully from file: {config_file}")
     else:
         app.config.from_mapping(test_config)
+        app.logger.info("User config is loaded successfully!")
+        app.logger.debug(app.config)
+    
+    
+    # from pprint import pprint
+    # pprint(app.config)
+
+
+    # Load extensions
+    from extensions import db, jwt
+    db.init_app(app)
+    jwt.init_app(app)
+
+
 
     # Import blueprints
-    from mod_auth import mod_auth, mod_auth_api
-    app.register_blueprint(mod_auth, url_prefix='/auth')
-    app.register_blueprint(mod_auth_api, url_prefix='/api/auth')
+    from blueprints.mod_auth_api import mod_auth_api
+    app.register_blueprint(mod_auth_api, url_prefix='/')
+    
+    # from blueprints.auth_view import mod_view
+    # app.register_blueprint(mod_view, url_prefix='/view')
 
     return app
 
 
 
-
 if __name__ == '__main__':      # Use for testing
-    test_config = {
-        'SECRET_KEY':'WhySoSecret',
-        'TESTING':True,
-        'DEBUG':True,
-        'ENV':'development',
-        'SESSION_COOKIE_SECURE' : True
-    }
-    app = create_app(test_config)
+    app = create_app()
     app.run(host='0.0.0.0', port=8000)
