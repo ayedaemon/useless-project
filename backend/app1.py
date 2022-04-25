@@ -1,10 +1,7 @@
 from flask import Flask
 
 
-def create_app(test_config=None) -> Flask:
-
-    app = Flask(__name__)
-
+def load_flask_config(app, test_config=None):
     # Import config
     if test_config is None:
         config_file = 'config.py'
@@ -15,25 +12,38 @@ def create_app(test_config=None) -> Flask:
         app.logger.info("User config is loaded successfully!")
         app.logger.debug(app.config)
     
-    
-    # from pprint import pprint
-    # pprint(app.config)
+    return app
 
 
+
+
+def load_flask_extensions(app):
     # Load extensions
-    from extensions import db, jwt
+    from extensions import db
     db.init_app(app)
+
+    from extensions import jwt
     jwt.init_app(app)
 
+    return app
+
+
+
+
+
+def create_app(test_config=None) -> Flask:
+
+    app = Flask(__name__)
+
+    app = load_flask_config(app, test_config)
+    
+    app = load_flask_extensions(app)
 
 
     # Import blueprints
     from blueprints.mod_auth_api import mod_auth_api
     app.register_blueprint(mod_auth_api, url_prefix='/')
     
-    # from blueprints.auth_view import mod_view
-    # app.register_blueprint(mod_view, url_prefix='/view')
-
     return app
 
 

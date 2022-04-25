@@ -4,4 +4,4 @@ flask
 gunicorn
 Flask-SQLAlchemy
 flask-jwt-extended[asymmetric_crypto]
-
+requests
