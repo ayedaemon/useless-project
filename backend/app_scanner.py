@@ -34,7 +34,6 @@ def create_app(test_config=None) -> Flask:
     
     app = load_flask_extensions(app)
 
-
     # Import blueprints
     from blueprints.mod_scanner import mod_scanner
     app.register_blueprint(mod_scanner, url_prefix='/scanner')

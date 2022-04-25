@@ -1,4 +1,5 @@
-./backend/auth.db
+./backend/build
+./backend/*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
